@@ -3,13 +3,17 @@ This is the official implementation of our paper "[Investigating the Emergent Au
 
 Authors: [Rao Ma](https://julirao.github.io)†, [Adian Liusie](https://github.com/adianliusie)†, Mark Gales, Kate Knill
 
+![draw](/resources/tasks.png)
+
+![method](/resources/method.png)
+
 Keypoints:
 - In this work we investigate the ability of [Whisper](https://github.com/openai/whisper) and [MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition), ASR foundation models trained primarily for speech recognition, to perform **zero-shot audio classification**.
 - With **simple template-based text prompts**, we demonstrate that Whisper shows promising zero-shot classification performance on **8 audio-classification datasets**, outperforming existing state-of-the-art zero-shot baseline's accuracy by an average of **9%**. 
 - To unlock the emergent ability, we introduce **debiasing** approaches. A simple unsupervised reweighting method of the class probabilities yields consistent significant performance gains. 
 - We also show that **performance increases with model size**, implying that as ASR foundation models scale up, they may exhibit improved zero-shot performance.
 
-[[slides]]()
+[[slides]](/resources/Talk_Nvidia.pdf)
 
 Overview
 -----------------------------------------
@@ -88,6 +92,7 @@ We list the classification accuracy using Whisper large-v2 obtained with prompt0
 | Ours, Zero-input | 35.9 | 52.1 | 18.0 | 57.5 | 29.4 | 26.5 | 45.8 | 13.6 | 34.9 |
 | Ours, Prior-matched | 65.4 | 60.4 | 26.0 | 84.9 | 41.7 | 28.8 | 60.9 | 17.3 | **48.2** |
 
+![accuracy](/resources/accuracy.jpg)
 
 Citation
 -----------------------------------------
