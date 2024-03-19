@@ -50,7 +50,7 @@ Here we use the ESC-50 dataset as an example to illustrate how to prompt the eme
 
 Run the zero-shot audio classification:
 
-    python3 src/whisper_audio_classification.py --eval_list_file data/ESC50/prompt0 --ilm zero --avg_len 
+    python3 src/whisper_audio_classification.py --eval_list_file data/ESC50/prompt0
 
 Run the zero-shot audio classification with zero input:
 
