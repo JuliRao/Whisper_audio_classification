@@ -2,7 +2,7 @@
 -----------------------------------------
 This is the official implementation of our paper "[Investigating the Emergent Audio Classification Ability of ASR Foundation Models](https://arxiv.org/abs/2311.09363)".
 
-Authors: [Rao Ma](julirao.github.io)†, [Adian Liusie](https://github.com/adianliusie)†, Mark Gales, Kate Knill
+Authors: [Rao Ma](https://julirao.github.io)†, [Adian Liusie](https://github.com/adianliusie)†, Mark Gales, Kate Knill
 
 Keypoints:
 - In this work we investigate the ability of [Whisper](https://github.com/openai/whisper) and [MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition), ASR foundation models trained primarily for speech recognition, to perform **zero-shot audio classification**.
