@@ -54,11 +54,15 @@ Run the zero-shot audio classification:
 
 Run the zero-shot audio classification with zero input:
 
-    python3 src/whisper_audio_classification.py --eval_list_file data/ESC50/prompt0 --ilm zero --avg_len 5.0
+    python3 src/whisper_audio_classification.py \
+        --eval_list_file data/ESC50/prompt0 \
+        --ilm zero --avg_len 5.0
 
 Run the zero-shot audio classification with Gaussian noise:
 
-    python3 src/whisper_audio_classification.py --eval_list_file data/ESC50/prompt0 --ilm gaussian --avg_len 5.0
+    python3 src/whisper_audio_classification.py \
+        --eval_list_file data/ESC50/prompt0 \
+        --ilm gaussian --avg_len 5.0
 
 Calculate the classification accuracy with different calibration methods:
 
