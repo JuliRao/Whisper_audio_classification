@@ -32,7 +32,7 @@ Data Preparation
 In our paper we experimented with 8 audio classification datasets and 1 audio question answering dataset.
 
 <div style="text-align: center;">
-<img src="resources/tasks.png" alt="tasks" style="width: 75%;">
+    <img src="resources/tasks.png" alt="tasks" style="width: 80%;">
 </div>
 
 
