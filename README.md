@@ -5,10 +5,10 @@ This is the official implementation of our paper "[Investigating the Emergent Au
 Authors: [Rao Ma](julirao.github.io)†, [Adian Liusie](https://github.com/adianliusie)†, Mark Gales, Kate Knill
 
 Keypoints:
-- In this work we investigate the ability of [Whisper](https://github.com/openai/whisper) and [MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition), ASR foundation models trained primarily for speech recognition, to perform zero-shot audio classification. 
-- With **simple template-based text prompts**, we demonstrate that **Whisper shows promising zero-shot classification performance on 8 audio-classification datasets**, outperforming existing state-of-the-art zero-shot baseline's accuracy by an average of **9%**. 
+- In this work we investigate the ability of [Whisper](https://github.com/openai/whisper) and [MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition), ASR foundation models trained primarily for speech recognition, to perform **zero-shot audio classification**.
+- With **simple template-based text prompts**, we demonstrate that Whisper shows promising zero-shot classification performance on **8 audio-classification datasets**, outperforming existing state-of-the-art zero-shot baseline's accuracy by an average of **9%**. 
 - To unlock the emergent ability, we introduce **debiasing** approaches. A simple unsupervised reweighting method of the class probabilities yields consistent significant performance gains. 
-- We also show that performance increases with model size, implying that as ASR foundation models scale up, they may exhibit improved zero-shot performance.
+- We also show that **performance increases with model size**, implying that as ASR foundation models scale up, they may exhibit improved zero-shot performance.
 
 
 Overview
