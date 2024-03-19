@@ -73,7 +73,7 @@ Results using this repository
 
 We list the classification accuracy using Whisper large-v2 obtained with prompt0, please refer to our paper for more detailed results.
 
-| Model | ESC50 | US8K  | TUT | Vocal | RAVDESS | CREMA-D | GTZAN | LibriCount | **Avg.** |
+| Model | ESC50 | US8K  | TUT | Vocal | RAVDESS | CREMA-D | GTZAN | LibriCnt | **Avg.** |
 |-------|-------|-------|-----|-------|---------|---------|-------|-----------|---------------| 
 | Random | 2.0 | 10.0 | 6.7 | 16.7 | 12.5 | 16.7 | 10.0 | 9.1 | 10.4 |
 | [AudioCLIP](https://arxiv.org/abs/2106.13043) | 69.4 | 65.3 | - | - | - | - | - | - | - |
