@@ -3,8 +3,6 @@ This is the official implementation of our paper "[Investigating the Emergent Au
 
 Authors: [Rao Ma](https://julirao.github.io)†, [Adian Liusie](https://github.com/adianliusie)†, Mark Gales, Kate Knill
 
-![draw](/resources/tasks.png)
-
 ![method](/resources/method.png)
 
 Keypoints:
@@ -31,7 +29,12 @@ Requirements
 
 Data Preparation
 -----------------------------------------
-In our paper we used 8 audio classification datasets and 1 audio question answering dataset.
+In our paper we experimented with 8 audio classification datasets and 1 audio question answering dataset.
+
+<div style="text-align: center;">
+<img src="resources/tasks.png" alt="tasks" style="width: 75%;">
+</div>
+
 
 Please download the original wav data from the test split using the following links and modify the audio paths for files under the `data/` directory accordingly.
 
@@ -80,6 +83,8 @@ Calculate the classification accuracy with different calibration methods:
 Results using this repository
 -----------------------------------------
 
+![accuracy](/resources/accuracy.jpg)
+
 We list the classification accuracy using Whisper large-v2 obtained with prompt0, please refer to our paper for more detailed results.
 
 | Model | ESC50 | US8K  | TUT | Vocal | RAVDESS | CREMAD | GTZAN | LibriCnt | **Avg.** |
@@ -92,7 +97,6 @@ We list the classification accuracy using Whisper large-v2 obtained with prompt0
 | Ours, Zero-input | 35.9 | 52.1 | 18.0 | 57.5 | 29.4 | 26.5 | 45.8 | 13.6 | 34.9 |
 | Ours, Prior-matched | 65.4 | 60.4 | 26.0 | 84.9 | 41.7 | 28.8 | 60.9 | 17.3 | **48.2** |
 
-![accuracy](/resources/accuracy.jpg)
 
 Citation
 -----------------------------------------
