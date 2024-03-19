@@ -1,5 +1,4 @@
 # Whisper_audio_classification
------------------------------------------
 This is the official implementation of our paper "[Investigating the Emergent Audio Classification Ability of ASR Foundation Models](https://arxiv.org/abs/2311.09363)".
 
 Authors: [Rao Ma](https://julirao.github.io)†, [Adian Liusie](https://github.com/adianliusie)†, Mark Gales, Kate Knill
@@ -10,6 +9,7 @@ Keypoints:
 - To unlock the emergent ability, we introduce **debiasing** approaches. A simple unsupervised reweighting method of the class probabilities yields consistent significant performance gains. 
 - We also show that **performance increases with model size**, implying that as ASR foundation models scale up, they may exhibit improved zero-shot performance.
 
+[[slides]]()
 
 Overview
 -----------------------------------------
