@@ -2,20 +2,16 @@
 # Apply Whisper for zero-shot Audio Classification
 # Rao Ma, 2023-12-06
 import argparse
-from general import check_output_dir, str2bool
-import wandb
-import os
+from general import check_output_dir
 import numpy as np
 import torch
 from torch import nn
 from pytorch_lightning import seed_everything
 import torchaudio
 import torchaudio.transforms as at
+import os
 import numpy
 import whisper
-import math
-import random
-import time
 
 
 def load_wave(wave_path, sample_rate:int=16000) -> torch.Tensor:
@@ -25,15 +21,10 @@ def load_wave(wave_path, sample_rate:int=16000) -> torch.Tensor:
     return waveform
 
 
-def load_audio_file_list(pair_list_path, ilm=False):
+def load_audio_file_list(pair_list_path):
     audio_transcript_pair_list = []
-    audio_id = None
     for line in open(pair_list_path):
         line_sp = line.strip().split(None, 2)
-        if not audio_id:
-            audio_id = line_sp[0]
-        elif audio_id != line_sp[0] and ilm:
-            break
         if len(line_sp) == 2:
             line_sp.append('')
         assert len(line_sp) == 3
@@ -55,7 +46,7 @@ class SpeechDataset(torch.utils.data.Dataset):
         return len(self.audio_info_list)
     
     def __getitem__(self, id):
-        audio_id, audio_path, text = self.audio_info_list[id]
+        _, audio_path, text = self.audio_info_list[id]
         if self.audio is not None:
             audio = self.audio
         else:
@@ -103,17 +94,17 @@ class WhisperDataCollatorWhithPadding:
 
 
 def audio_classification(args):
-    out_dir = args.out_dir
+    out_dir = f"{args.out_dir}/{args.model}/{args.eval_list_file.split('/')[1]}"
     check_output_dir(out_dir)
     out_fname = f"{out_dir}/{args.eval_list_file.split('/')[-1]}"
     if args.ilm:
         if args.ilm == 'gaussian':
-            out_fname += '_ilm_gaussian_' + str(args.std) + '_' + str(args.seed)
+            out_fname += '_ilm_gaussian_' + str(args.std)
         elif args.ilm == 'zero':
             out_fname += '_ilm_zeros'
 
     eval_datalist = load_audio_file_list(args.eval_list_file)
-    wmodel = whisper.load_model(args.model, device=args.device, download_root=args.model_dir)
+    wmodel = whisper.load_model(args.model, device=args.device, download_root=os.path.expanduser(args.model_dir))
     wtokenizer = whisper.tokenizer.get_tokenizer(not args.model.endswith('.en'), language=args.language, task='transcribe', num_languages=wmodel.num_languages)
 
     if args.ilm == 'gaussian':
@@ -140,25 +131,24 @@ def audio_classification(args):
                 loss = loss_fn(out.reshape(-1, out.size(-1)), labels.view(-1)).view(dec_input_ids.size(0), -1)
                 loss = loss.sum(dim=-1)
 
-            for l, label in zip(loss, labels):
+            for l, _ in zip(loss, labels):
                 audio_id, audio_path, text = eval_datalist[idx]
                 fout.write(f'{audio_id} {audio_path} {float(l)} {text}\n')
                 idx = idx + 1
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Transcribe wav files in a wav list')
+    parser = argparse.ArgumentParser(description='Perform zero-shot audio classification with Whisper')
     parser.add_argument('--model', type=str, default='large-v2', help='version of the pretrained Whisper model')
-    parser.add_argument('--model_dir', type=str, default='~/.cache', help='path to load model')
+    parser.add_argument('--model_dir', type=str, default='~/.cache/whisper', help='path to load model')
     parser.add_argument('--seed', type=int, default=1031, help='random seed')
-    parser.add_argument('--notimestamp', type=str2bool, default=True, help='True: without_timestamps=True')
-    parser.add_argument('--eval_list_file', type=str, default='')
-    parser.add_argument('--out_dir', type=str)
-    parser.add_argument('--ilm', type=str)
+    parser.add_argument('--eval_list_file', type=str, default='', help='filepath containing all prompted text sequences to be evaluated')
+    parser.add_argument('--out_dir', type=str, default='exp')
+    parser.add_argument('--ilm', type=str, default='', help='used for null-input calibration, could be set to zero or gaussian')
     parser.add_argument('--sample_rate', type=int, default=16000)
-    parser.add_argument('--eval_batch_size', type=int, default=64)
-    parser.add_argument('--avg_len', type=float, default=0)
-    parser.add_argument('--std', type=float, default=0)
+    parser.add_argument('--eval_batch_size', type=int, default=16)
+    parser.add_argument('--avg_len', type=float, default=0, help='used in null-input calibration. The average length of each dataset. ESC-50-master: 5; UrbanSound8K: 3.6; TUT2017_eval: 10; vocal: 5; ravdess: 3.7; CREMA-D: 5.0; GTZAN_genres: 30.0 LibriCount: 5.0')
+    parser.add_argument('--std', type=float, default=1.0, help='the std value used in gaussian-noise null-input calibration')
     parser.add_argument('--language', type=str, default='en')
 
     args = parser.parse_args()
